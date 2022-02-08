@@ -2,7 +2,8 @@ public with sharing class ConsumingJsonServer{
     
     public static final String URL = 'https://jsonplaceholder.typicode.com/posts';
     
-    public static void getAllPosts(){
+    @AuraEnabled(cacheable = true)
+    public static List<String> getAllPosts(){
         
         Http http = new Http();
         HttpRequest request = new HttpRequest();
@@ -12,6 +13,7 @@ public with sharing class ConsumingJsonServer{
         List<Object> results = new List<Object>();
         Map<String, Object> mapResponse = new Map<String, Object>();
         List<String> titleList = new List<String>();
+        Integer counter = 0;
         // If the request is successful, parse the JSON response.
         if (response.getStatusCode() == 200){
             // Deserialize the JSON string into collections of primitive data types.
@@ -22,16 +24,21 @@ public with sharing class ConsumingJsonServer{
         if(!results.isEmpty()){
             for(Object o: results){
                 mapResponse = (Map<String, Object>) o;
-                titleList.add((String)mapResponse.get('title'));
+                if(counter<10){
+                    titleList.add((String)mapResponse.get('title'));
+                }
+                counter++;
             }
         }
         
         if(!titleList.isEmpty()){
             System.debug('List of titles: '+titleList.size());
         }
+        return titleList;
     }
     
-    public static void getSpecificPost(Integer id){
+    @AuraEnabled(cacheable = true)
+    public static String getSpecificPost(Integer id){
         
         Http http = new Http();
         HttpRequest request = new HttpRequest();
@@ -51,6 +58,7 @@ public with sharing class ConsumingJsonServer{
             title = (String) results.get('title');
         }
         System.debug('The title is: '+ title);
+        return title;
         
     }
 }
