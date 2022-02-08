@@ -16,3 +16,12 @@ The `sfdx-project.json` file contains useful configuration information for your 
 - [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
 - [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
 - [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+
+## About the project
+
+The idea is show how you can consuming a external service when these return a list of values or a unic object in specific and how save it in different variables.
+
+# Steps
+- You should use in this case, the next server for fake api json [JSON PLACE HOLDER](https://jsonplaceholder.typicode.com/)
+- You should give access to the api from remote settings
+- Finally copy the class named ConsumingJsonServer and Run your code in your org
