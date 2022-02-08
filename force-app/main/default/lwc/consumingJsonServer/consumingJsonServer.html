@@ -10,7 +10,7 @@
     <lightning-card title="Posts Titles">
         <p class="slds-p-horizontal_small">
             <template for:each={titleList} for:item="tit">
-                <ul key = {tit}>
+                <ul key = {titleList}>
                     <li>{tit}</li>
                 </ul>
                 
@@ -19,12 +19,13 @@
         <p slot="footer">Leonardo Monsalvo Inc (C)</p>
     </lightning-card>
 
-    <template if:true={title}></template>
-    <lightning-card title="Posts Titles">
-        <p class="slds-p-horizontal_small">
-            The title was found: {title}
-        </p>
-        <p slot="footer">Leonardo Monsalvo Inc (C)</p>
-    </lightning-card>
+    <template if:true={show}>
+        <lightning-card title="Posts Title">
+            <p class="slds-p-horizontal_small">
+                The title was found: {title}
+            </p>
+            <p slot="footer">Leonardo Monsalvo Inc (C)</p>
+        </lightning-card>
+    </template>
 
 </template>

@@ -4,7 +4,8 @@ import getSpecificPost from '@salesforce/apex/ConsumingJsonServer.getSpecificPos
 
 export default class ConsumingJsonServer extends LightningElement {
 
-    @track id = '';
+    @track id;
+    @track show = false
     @track titleList = [];
     @track title;
     @track error;    
@@ -22,14 +23,19 @@ export default class ConsumingJsonServer extends LightningElement {
 
    handleSave(){
        console.log(this.id);
-       if(this.id != ''){
-        getSpecificPost({id: this.id})
-            .then((result)=>{
-                this.title = result;
-            })
-            .catch(error => {
-                this.error = error;
-            });
+       if(this.id != null){
+            getSpecificPost({id: this.id})
+                .then((result)=>{
+                    if(this.title != 'empty'){
+                        this.show = true;
+                        this.title = result;
+                    }else if(this.title == 'empty'){
+                        this.show = false;
+                    }
+                })
+                .catch(error => {
+                    this.error = error;
+                });
        }
    }
 
